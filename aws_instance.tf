@@ -29,6 +29,10 @@ EOF
 tags = {
     Name = "build_server"
   }
+  provisioner "file" {
+    source      = "~/.aws"
+    destination = "~/.aws"
+  }
 }
 
 resource "aws_instance" "Run_app" {
