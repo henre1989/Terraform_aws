@@ -39,7 +39,7 @@ tags = {
   connection {
     type     = "ssh"
     user     = "root"
-    host     = [aws_instance.public_ip]
+    host     = [aws_instance.build.public_ip]
   }
   }
 }
