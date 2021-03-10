@@ -20,18 +20,13 @@ resource "aws_instance" "build" {
 #!/bin/bash
 apt update
 apt install docker.io -y
-apt install aws -y
-mkdir ~/.aws
 cd /home/ubuntu
 git clone https://github.com/henre1989/Dockerfile_java_app.git
 docker build -t henre1989/myapp .
+
 EOF
 tags = {
     Name = "build_server"
-  }
-  provisioner "file" {
-    source      = "~/.aws"
-    destination = "~/.aws"
   }
 }
 
