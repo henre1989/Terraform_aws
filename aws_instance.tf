@@ -35,7 +35,6 @@ resource "aws_instance" "Run_app" {
   tags {
     Name = "run_app_server"
   }
-  }
   user_data = <<EOF
 #!/bin/bash
 apt update
