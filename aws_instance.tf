@@ -55,6 +55,13 @@ resource "aws_security_group" "run_app" {
     protocol    = "tcp"
   }
 
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
