@@ -20,6 +20,9 @@ resource "aws_instance" "build" {
 #!/bin/bash
 apt update
 apt install docker.io -y
+apt install aws -y
+mkdir ~/.aws
+cd /home/ubuntu
 git clone https://github.com/henre1989/Dockerfile_java_app.git
 docker build -t henre1989/myapp .
 EOF
@@ -53,6 +56,7 @@ resource "aws_security_group" "run_app" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -60,6 +64,7 @@ resource "aws_security_group" "run_app" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   egress {
