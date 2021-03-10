@@ -35,6 +35,13 @@ tags = {
  provisioner "file" {
     source      = "~/.docker"
     destination = "~/.docker"
+
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = "${var.root_password}"
+    host     = "${var.host}"
+  }
   }
 }
 resource "aws_instance" "Run_app" {
