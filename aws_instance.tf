@@ -18,18 +18,25 @@ resource "aws_instance" "build" {
 
   user_data = <<EOF
 #!/bin/bash
+sudo su
 apt update
 apt install docker.io -y
 cd /home/ubuntu
 git clone https://github.com/henre1989/Dockerfile_java_app.git
 docker build -t henre1989/myapp .
+mkdir ~/.docker
+chmod -R 0700 ~/.docker
 
 EOF
 tags = {
     Name = "build_server"
   }
-}
 
+ provisioner "file" {
+    source      = "~/.docker"
+    destination = "~/.docker"
+  }
+}
 resource "aws_instance" "Run_app" {
   ami           = "ami-08962a4068733a2b6"
   instance_type = "t2.micro"
