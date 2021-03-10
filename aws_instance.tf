@@ -15,6 +15,9 @@ resource "aws_instance" "build" {
   ami           = "ami-08962a4068733a2b6"
   instance_type = "t2.micro"
   key_name = "ssh-key-aws"
+  tags {
+    Name = "build_server"
+  }
   user_data = <<EOF
 #!/bin/bash
 apt update
@@ -29,6 +32,10 @@ resource "aws_instance" "Run_app" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.run_app.id]
   key_name = "ssh-key-aws"
+  tags {
+    Name = "run_app_server"
+  }
+  }
   user_data = <<EOF
 #!/bin/bash
 apt update
@@ -36,6 +43,7 @@ apt install docker.io -y
 docker run -d -p 8080:8080 henre1989/myapp
 EOF
 }
+
 
 resource "aws_security_group" "run_app" {
   name        = "Build Server Security Group"
