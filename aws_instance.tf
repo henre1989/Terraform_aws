@@ -23,7 +23,7 @@ apt install docker.io -y
 git clone https://github.com/henre1989/Dockerfile_java_app.git
 docker build -t henre1989/myapp .
 EOF
-tags {
+tags = {
     Name = "build_server"
   }
 }
@@ -39,7 +39,7 @@ apt update
 apt install docker.io -y
 docker run -d -p 8080:8080 henre1989/myapp
 EOF
-tags {
+tags = {
     Name = "run_app_server"
   }
 }
