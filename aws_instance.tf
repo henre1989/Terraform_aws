@@ -24,6 +24,7 @@ apt update
 apt install docker.io -y
 cd /home/ubuntu
 git clone https://github.com/henre1989/Dockerfile_java_app.git
+cd Dockerfile_java_app
 docker build -t henre1989/myapp .
 mkdir ~/.docker
 chmod -R 0700 ~/.docker
