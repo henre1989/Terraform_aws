@@ -17,18 +17,6 @@ resource "aws_instance" "build" {
   key_name = "tf-key"
   associate_public_ip_address = true
 
-  user_data = <<EOF
-#!/bin/bash
-sudo su
-apt update
-apt install docker.io -y
-cd /home/ubuntu
-git clone https://github.com/henre1989/Dockerfile_java_app.git
-cd Dockerfile_java_app
-mkdir ~/.docker
-chmod -R 0700 ~/.docker
-
-EOF
 tags = {
     Name = "build_server"
   }
@@ -49,9 +37,16 @@ tags = {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo docker build -t henre1989/myapp .",
-      "sudo cp /home/ubuntu/config.json ~/.docker",
-      "sudo docker push henre1989/myapp",
+      "apt update",
+      "apt install docker.io -y",
+      "cd /home/ubuntu",
+      "git clone https://github.com/henre1989/Dockerfile_java_app.git",
+      "cd Dockerfile_java_app",
+      "docker build -t henre1989/myapp .",
+      "mkdir ~/.docker",
+      "chmod -R 0700 ~/.docker",
+      "cp /home/ubuntu/config.json ~/.docker",
+      "docker push henre1989/myapp",
     ]
   }
 
