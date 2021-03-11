@@ -51,6 +51,7 @@ resource "aws_instance" "Run_app" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.run_app.id]
   key_name = "ssh-key-aws"
+  depends_on = [aws_instance.build]
   user_data = <<EOF
 #!/bin/bash
 apt update
@@ -65,6 +66,7 @@ tags = {
 resource "aws_security_group" "run_app" {
   name        = "Build Server Security Group"
   description = "My Build Server Security Group"
+
 
   ingress {
     description = "tomcat ports"
@@ -92,5 +94,5 @@ resource "aws_security_group" "run_app" {
   tags = {
     Name = "allow_tls"
   }
-  depends_on = [aws_instance.build.id]
+
 }
