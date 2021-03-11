@@ -43,11 +43,11 @@ tags = {
       "cd /home/ubuntu",
       "git clone https://github.com/henre1989/Dockerfile_java_app.git",
       "cd Dockerfile_java_app",
-      "sudo docker build -t henre1989/myapp .",
+      #"sudo docker build -t henre1989/myapp .",
       "sudo mkdir ~/.docker",
       "sudo chmod -R 0700 ~/.docker",
       "sudo cp /home/ubuntu/config.json ~/.docker",
-      "sudo docker push henre1989/myapp",
+      #"sudo docker push henre1989/myapp",
     ]
   }
 
