@@ -38,7 +38,6 @@ tags = {
     host  = aws_instance.build.public_ip
     user  = "root"
     port  = "22"
-    agent = true
   }
 
  provisioner "file" {
