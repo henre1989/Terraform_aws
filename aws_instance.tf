@@ -37,9 +37,9 @@ tags = {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo su",
-      "apt update",
-      "apt install docker.io -y",
+      #"sudo su",
+      #"apt update",
+      #"apt install docker.io -y",
       "cd /home/ubuntu",
       "git clone https://github.com/henre1989/Dockerfile_java_app.git",
       "cd Dockerfile_java_app",
