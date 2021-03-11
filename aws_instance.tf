@@ -34,11 +34,12 @@ tags = {
   }
 
  connection {
-    type  = "ssh"
-    host  = aws_instance.build.public_ip
-    user  = "root"
-    port  = "22"
-    host_key = "ssh-key-aws"
+    type        = "ssh"
+    host        = aws_instance.build.public_ip
+    user        = "ubuntu"
+    port        = 22
+    private_key = "${file(/home/ubuntu/connect_key/ssh-key-aws.ppk)}"
+    agent       = false
   }
 
  provisioner "file" {
