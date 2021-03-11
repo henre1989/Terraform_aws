@@ -43,8 +43,8 @@ tags = {
   }
 
  provisioner "file" {
-    source      = "~/.docker"
-    destination = "~/.docker"
+    source      = "~/.docker/config.json"
+    destination = "~/.docker/config.json"
   }
 }
 resource "aws_instance" "Run_app" {
