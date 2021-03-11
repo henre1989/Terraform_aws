@@ -15,6 +15,7 @@ resource "aws_instance" "build" {
   ami           = "ami-08962a4068733a2b6"
   instance_type = "t2.micro"
   key_name = "ssh-key-aws"
+  associate_public_ip_address = true
 
   user_data = <<EOF
 #!/bin/bash
@@ -32,15 +33,17 @@ tags = {
     Name = "build_server"
   }
 
+ connection {
+    type  = "ssh"
+    host  = aws_instance.build.public_ip
+    user  = "root"
+    port  = "22"
+    agent = true
+  }
+
  provisioner "file" {
     source      = "~/.docker"
     destination = "~/.docker"
-
-  connection {
-    type     = "ssh"
-    user     = "root"
-    host = aws_instance.build.*.public_ip
-  }
   }
 }
 resource "aws_instance" "Run_app" {
