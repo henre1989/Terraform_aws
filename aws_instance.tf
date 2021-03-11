@@ -25,7 +25,6 @@ apt install docker.io -y
 cd /home/ubuntu
 git clone https://github.com/henre1989/Dockerfile_java_app.git
 cd Dockerfile_java_app
-docker build -t henre1989/myapp .
 mkdir ~/.docker
 chmod -R 0700 ~/.docker
 
@@ -37,7 +36,7 @@ tags = {
  connection {
     type        = "ssh"
     host        = aws_instance.build.public_ip
-    user        = "ubuntu"
+    user        = "root"
     port        = 22
     private_key = "${file("/home/ubuntu/connect_key/tf-key.pem")}"
     agent       = false
@@ -45,8 +44,18 @@ tags = {
 
  provisioner "file" {
     source      = "~/.docker/config.json"
-    destination = "~/.docker/config.json"
+    destination = "/home/ubuntu/config.json"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "docker build -t henre1989/myapp .",
+      "cp /home/ubuntu/config.json ~/.docker",
+      "docker push henre1989/myapp",
+    ]
+  }
+
+
 }
 resource "aws_instance" "Run_app" {
   ami           = "ami-08962a4068733a2b6"
