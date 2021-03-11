@@ -36,7 +36,7 @@ tags = {
  connection {
     type        = "ssh"
     host        = aws_instance.build.public_ip
-    user        = "root"
+    user        = "ubuntu"
     port        = 22
     private_key = "${file("/home/ubuntu/connect_key/tf-key.pem")}"
     agent       = false
@@ -49,9 +49,9 @@ tags = {
 
   provisioner "remote-exec" {
     inline = [
-      "docker build -t henre1989/myapp .",
-      "cp /home/ubuntu/config.json ~/.docker",
-      "docker push henre1989/myapp",
+      "sudo docker build -t henre1989/myapp .",
+      "sudo cp /home/ubuntu/config.json ~/.docker",
+      "sudo docker push henre1989/myapp",
     ]
   }
 
