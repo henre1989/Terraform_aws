@@ -38,6 +38,7 @@ tags = {
     host  = aws_instance.build.public_ip
     user  = "root"
     port  = "22"
+    host_key = "ssh-key-aws"
   }
 
  provisioner "file" {
@@ -91,4 +92,5 @@ resource "aws_security_group" "run_app" {
   tags = {
     Name = "allow_tls"
   }
+  depends_on = [aws_instance.build.id]
 }
