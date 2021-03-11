@@ -37,6 +37,7 @@ tags = {
 
   provisioner "remote-exec" {
     inline = [
+      "sudo su",
       "apt update",
       "apt install docker.io -y",
       "cd /home/ubuntu",
