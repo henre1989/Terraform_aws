@@ -47,7 +47,7 @@ tags = {
       "sudo mkdir ~/.docker",
       "sudo chmod -R 0700 ~/.docker",
       "sudo cp /home/ubuntu/config.json ~/.docker",
-      #"sudo docker push henre1989/myapp",
+      "sudo docker push henre1989/myapp",
     ]
   }
 
